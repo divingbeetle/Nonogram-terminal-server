@@ -22,7 +22,7 @@ func InitDB(username, password, host, port, dbname string) error {
 	db.SetMaxOpenConns(conns)
 	db.SetMaxIdleConns(conns)
 
-	return nil
+	return db.Ping()
 }
 
 func FetchPuzzle() (types.Puzzle, error) {
