@@ -17,7 +17,7 @@ func NewServer(listenAddr string) *Server {
 }
 
 func (s *Server) Start() error {
-	http.HandleFunc("/puzzle", s.handlePuzzleRequest)
+	http.HandleFunc("/puzzles", s.handlePuzzleRequest)
 	return http.ListenAndServe(s.listenAddr, nil)
 }
 
