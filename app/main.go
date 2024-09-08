@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	// "os"
+	"os"
 
 	"github.com/divingbeetle/Nonogram-terminal-server/api"
 	"github.com/divingbeetle/Nonogram-terminal-server/storage"
@@ -13,17 +13,17 @@ import (
 func main() {
 	listenAddr := flag.String("listen-addr", ":8080", "server listen address")
 
-	dbuser := flag.String("dbuser", "test_user", "database user")
-	dbpass := flag.String("dbpass", "test_password17", "database password")
-	dbhost := flag.String("dbhost", "localhost", "database host")
-	dbport := flag.String("dbport", "5432", "database port")
-	dbname := flag.String("dbname", "puzzle_db", "database name")
+    dbuser := os.Getenv("DB_USER")
+    dbpass := os.Getenv("DB_PASSWORD")
+    dbhost := os.Getenv("DB_HOST")
+    dbport := os.Getenv("DB_PORT")
+    dbname := os.Getenv("DB_NAME")
 	flag.Parse()
 
 	server := api.NewServer(*listenAddr)
 	fmt.Printf("Starting server on %v\n", *listenAddr)
 
-	err := storage.InitDB(*dbuser, *dbpass, *dbhost, *dbport, *dbname)
+	err := storage.InitDB(dbuser, dbpass, dbhost, dbport, dbname)
 	if err != nil {
 		log.Fatal(err)
 	}

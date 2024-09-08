@@ -8,3 +8,5 @@
 *.out
 
 .env
+
+/postgres/scripts/puzzle_db_dump.sql

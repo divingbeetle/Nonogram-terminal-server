@@ -1,0 +1,32 @@
+services:
+  app:
+    build: ./app
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db 
+      - DB_USER=pz_admin
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=puzzle_db
+      - DB_PORT=5432
+  db:
+    build: ./postgres
+    restart: always
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=pz_admin
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=puzzle_db
+      - POSTGRES_PORT=5432
+
+volumes:
+  pgdata:
