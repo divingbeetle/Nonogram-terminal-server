@@ -29,7 +29,7 @@ func FetchPuzzle() (types.Puzzle, error) {
 	row := db.QueryRow(`
         WITH selected_puzzle AS (
         SELECT id, row_size, col_size, clues
-        FROM puzzles TABLESAMPLE BERNOULLI(1)
+        FROM puzzles TABLESAMPLE BERNOULLI(2)
         ORDER BY RANDOM()
         LIMIT 1
     )
