@@ -13,11 +13,11 @@ import (
 func main() {
 	listenAddr := flag.String("listen-addr", ":8080", "server listen address")
 
-    dbuser := os.Getenv("DB_USER")
-    dbpass := os.Getenv("DB_PASSWORD")
-    dbhost := os.Getenv("DB_HOST")
-    dbport := os.Getenv("DB_PORT")
-    dbname := os.Getenv("DB_NAME")
+	dbuser := os.Getenv("DB_USER")
+	dbpass := os.Getenv("DB_PASSWORD")
+	dbhost := os.Getenv("DB_HOST")
+	dbport := os.Getenv("DB_PORT")
+	dbname := os.Getenv("DB_NAME")
 	flag.Parse()
 
 	server := api.NewServer(*listenAddr)
